@@ -22,16 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/signUp").permitAll()
                 .antMatchers("/signIn").permitAll()
                 .antMatchers("/products").authenticated()
-                .antMatchers("/orders").hasAuthority("SELLER")
-                .antMatchers("/orders").hasAuthority("ADMIN")
-                .antMatchers("/order/**").hasAuthority("SELLER")
-                .antMatchers("/order/**").hasAuthority("ADMIN")
-                .antMatchers("/order_page").authenticated()
-                .antMatchers("/new_product").hasAuthority("ADMIN");
+                .antMatchers("/addProduct").hasAnyAuthority("ADMIN", "BUYER")
+                .antMatchers("/makeOrder").hasAnyAuthority("ADMIN", "BUYER")
+                .antMatchers("/orders").hasAnyAuthority("SELLER", "ADMIN")
+                .antMatchers("/order/**").hasAnyAuthority("SELLER", "ADMIN")
+                .antMatchers("/createProduct").hasAuthority("ADMIN");
 
         http.formLogin()
                 .loginPage("/signIn")
