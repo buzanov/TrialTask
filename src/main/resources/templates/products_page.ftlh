@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,33 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Products</title>
 </head>
-<script>
-    /* function add_to_cart() {
-         $(".button").click(function () {
-             buttonClick($(this).val());
-
-         })
-     }
-
-     function buttonClick(x) {
-         $.ajax({
-             type: "GET",
-             url: "addProduct?id" + x,
-
-             success: function (response) {
-                 alert('Success!' + ' Response: ' + response);
-             }
-         });
-     }*/
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.9/angular.min.js"></script>
+<script src="js/shop.js"></script>
 <body>
-<#list products as product>
-    <div id="${product.id}">
-        <h4>${product.name} ${product.price}</h4>
-        <a href="/addProduct?id=${product.id}">Add to cart</a>
-        <br>
-    </div>
-</#list>
+<div>
+    <table>
+        <tr>
+            <td>Product name</td>
+            <td>price</td>
+        </tr>
+        <#list products as product>
+            <tr>
+                <td>${product.name}</td>
+                <td>${product.price}</td>
+                <td>
+                    <button add-product id='${product.id}'>Add to cart</button>
+                </td>
+            </tr>
+        </#list>
+    </table>
+</div>
 <br>
 <a href="/makeOrder">Make Order</a>
 </body>

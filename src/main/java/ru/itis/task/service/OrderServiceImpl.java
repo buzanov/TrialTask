@@ -15,11 +15,18 @@ public class OrderServiceImpl implements OrderService {
     MySession session;
 
     @Override
+    public Order makeOrder(List<Product> products, User user) {
+        return Order.builder()
+                .ordered_products(products)
+                .user(user)
+                .build();
+    }
 
-    public Order makeOrder(List<Product> productList, User user) {
+    @Override
+    public Order makeOrder() {
         Order order = Order.builder()
-                .ordered_products(productList)
-                .user(user).build();
+                .ordered_products(session.getCart().getProductList())
+                .user(session.getUser()).build();
         session.cleanCart();
         return order;
     }

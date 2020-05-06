@@ -1,10 +1,8 @@
 package ru.itis.task.session;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 import ru.itis.task.model.Cart;
-import ru.itis.task.model.Order;
 import ru.itis.task.model.User;
 
 @Component

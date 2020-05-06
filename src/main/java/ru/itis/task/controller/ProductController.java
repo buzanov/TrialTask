@@ -1,8 +1,8 @@
 package ru.itis.task.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,10 +29,18 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.GET)
-    public String addProduct(@RequestParam Long id) {
+    public ResponseEntity<?> addProduct(@RequestParam Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        optionalProduct.ifPresent(product -> session.getCart().addProduct(product));
-        return "redirect:/products";
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            if (session.getCart().getProductList().contains(product)) {
+                session.getCart().getProductList().remove(product);
+                return ResponseEntity.ok().build();
+            }
+            session.getCart().addProduct(product);
+            return ResponseEntity.ok(product);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET)

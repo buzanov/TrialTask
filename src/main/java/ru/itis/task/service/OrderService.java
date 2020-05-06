@@ -8,5 +8,7 @@ import ru.itis.task.session.MySession;
 import java.util.List;
 
 public interface OrderService {
-    Order makeOrder(List<Product> productList, User user);
+    Order makeOrder(List<Product> products, User user);
+
+    Order makeOrder();
 }

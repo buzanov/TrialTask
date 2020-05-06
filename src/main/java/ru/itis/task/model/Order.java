@@ -19,10 +19,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToMany
+    @ManyToMany
     List<Product> ordered_products;
 
-    @ManyToOne
+    @ManyToOne()
     User user;
 
 }
