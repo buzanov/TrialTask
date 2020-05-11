@@ -2,6 +2,7 @@ package ru.itis.task.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ public class ProductController {
     MySession session;
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView products() {
         ModelAndView modelAndView = new ModelAndView("products_page");
         modelAndView.addObject("products", productRepository.findAll());
@@ -29,6 +31,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<?> addProduct(@RequestParam Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
@@ -44,11 +47,13 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String createProduct() {
         return "new_product";
     }
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addProductToBase(@RequestParam String name, @RequestParam String price) {
         productRepository.save(Product.builder()
                 .name(name)

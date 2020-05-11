@@ -1,6 +1,7 @@
 package ru.itis.task.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ public class OrderController {
     OrderService orderService;
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ModelAndView page() {
         ModelAndView modelAndView = new ModelAndView("orders_page");
         modelAndView.addObject("orders", orderRepository.findAll());
@@ -32,6 +34,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyAuthority('ADMIN','SELLER')")
     public ModelAndView order(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("order_page");
         orderRepository.findById(id).ifPresent(o -> modelAndView.addObject("order", o));
@@ -39,6 +42,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/makeOrder", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
     public String makeOrder() {
         Order order = orderService.makeOrder(session.getCart().getProductList(), session.getUser());
         orderRepository.save(order);

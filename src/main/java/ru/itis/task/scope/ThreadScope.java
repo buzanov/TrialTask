@@ -4,10 +4,12 @@ package ru.itis.task.scope;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
 import org.springframework.core.NamedThreadLocal;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class ThreadScope implements Scope {
 
     private final ThreadLocal<Map<String, Object>> threadScope =

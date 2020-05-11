@@ -1,6 +1,7 @@
 package ru.itis.task.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ public class AccountController {
     MySession session;
 
     @GetMapping("/account")
+    @PreAuthorize("isAuthenticated()")
     public ModelAndView profile() {
         ModelAndView modelAndView = new ModelAndView("profile_page");
         modelAndView.addObject("user", session.getUser());
@@ -28,6 +30,7 @@ public class AccountController {
     }
 
     @GetMapping("/account/{userId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestScope
     public ModelAndView profile(@PathVariable User userId) {
 //        Optional<User> optionalUser = userRepository.findById(userId);

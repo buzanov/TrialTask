@@ -1,6 +1,7 @@
 package ru.itis.task.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,13 @@ public class RegisterController {
     SignUpService signUpService;
 
     @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    @PreAuthorize("permitAll()")
     public String render() {
         return "sign_up";
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
+    @PreAuthorize("permitAll()")
     public String register(SignUpDto form) {
         signUpService.signUp(User.builder()
                 .login(form.getLogin())

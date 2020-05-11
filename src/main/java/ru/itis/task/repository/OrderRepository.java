@@ -8,4 +8,5 @@ import ru.itis.task.model.Order;
 @Component
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
+
 }
