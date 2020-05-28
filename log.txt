@@ -4,3 +4,8 @@ time of find all execution method-execution  -76
 Пользователь - User{id=1, login='admin', email='null', role=ADMIN} сделал заказ
 Пользователь - User{id=1, login='admin', email='null', role=ADMIN} сделал заказ
 Пользователь - User{id=3, login='vladek', email='null', role=BUYER} сделал заказ
+Пользователь - User{id=1, login='admin', email='null', role=ADMIN} сделал заказ
+Пользователь - User{id=1, login='admin', email='null', role=ADMIN} сделал заказ
+Пользователь - User{id=5, login='Владислав Бузанов', email='172246973', role=BUYER} сделал заказ
+Пользователь - User{id=1, login='admin', email='null', role=ADMIN} сделал заказ
+Пользователь - User{id=5, login='Владислав Бузанов', email='172246973', role=BUYER} сделал заказ

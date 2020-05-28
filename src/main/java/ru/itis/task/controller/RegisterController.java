@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.itis.task.dto.SignUpDto;
 import ru.itis.task.model.Role;
 import ru.itis.task.model.User;
-import ru.itis.task.service.SignUpService;
+import ru.itis.task.service.interfaces.SignUpService;
 
 @Controller
 public class RegisterController {

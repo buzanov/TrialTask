@@ -18,7 +18,7 @@ public class LoggingAspect {
     @Autowired
     Logger logger;
 
-    @After(value = "execution(* ru.itis.task.service.OrderService.makeOrder(..))")
+    @After(value = "execution(* ru.itis.task.service.interfaces.OrderService.makeOrder(..))")
     public void after(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         User user = (User) args[1];

@@ -1,16 +1,28 @@
 package ru.itis.task.scope;
 
 
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.Scope;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
+import ru.itis.task.ServletInitializer;
+import ru.itis.task.TaskApplication;
 
+import javax.servlet.ServletContext;
+import java.applet.AppletContext;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@RequestScope
 public class ThreadScope implements Scope {
+
+    @Autowired
+    BeanFactory beanFactory;
 
     private final ThreadLocal<Map<String, Object>> threadScope =
             new NamedThreadLocal<Map<String, Object>>(ThreadScope.class.getName()) {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 import ru.itis.task.model.User;
+import ru.itis.task.repository.OrderRepository;
 import ru.itis.task.repository.UserRepository;
 import ru.itis.task.session.MySession;
 
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class AccountController {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    OrderRepository orderRepository;
 
     @Autowired
     MySession session;
@@ -26,6 +29,7 @@ public class AccountController {
     public ModelAndView profile() {
         ModelAndView modelAndView = new ModelAndView("profile_page");
         modelAndView.addObject("user", session.getUser());
+        modelAndView.addObject("orders", orderRepository.findAllByUserId(session.getUser().getId()));
         return modelAndView;
     }
 

@@ -16,8 +16,7 @@
     </label>
     <input type="submit" value="Login">
 </form>
-<form action="/login" method="get">
-    <input type="submit" value="login with google">
-</form>
+<a href="https://oauth.vk.com/authorize?client_id=7461226&redirect_uri=http://localhost/signIn&display=popup&response_type=code">
+    Login with vk</a>
 </body>
 </html>

@@ -14,12 +14,14 @@
     <table>
         <tr>
             <td>Product name</td>
-            <td>price</td>
+            <td>Price</td>
+            <td>Category</td>
         </tr>
         <#list products as product>
             <tr>
                 <td>${product.name}</td>
                 <td>${product.price}</td>
+                <td>${product.category}</td>
                 <td>
                     <button add-product id='${product.id}'>Add to cart</button>
                 </td>

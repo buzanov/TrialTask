@@ -11,7 +11,7 @@
 <#if user??>
     <h1>${user.login}`s page</h1>
     <h2>Orders history</h2>
-    <#list user.orders as order>
+    <#list orders as order>
         <a href="/order/${order.id}">Order ${order.id}</a>
     </#list>
 <#else>

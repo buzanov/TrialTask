@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="ProductController">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,11 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add product</title>
 </head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.9/angular.min.js"></script>
+<script src="js/product.js"></script>
 <body>
-<form action="/createProduct" method="post">
+<form name="form" action="/createProduct" method="post">
     <input type="text" name="name" placeholder="name">
     <input type="text" name="price" placeholder="price">
-    <input type="submit" value="Create">
+    <select name="category">
+        <option value="{{category}}" ng-repeat="category in categories">{{category}}</option>
+    </select>
+    <br>
+    <input type="button" value="Create" ng-click="createProduct()">
 </form>
 </body>
 </html>

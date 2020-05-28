@@ -20,14 +20,23 @@ public class RequestFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if (SecurityContextHolder.getContext().getAuthentication() == null
-                && !((HttpServletRequest) servletRequest).getRequestURI().contains("sign")) {
+        /*if ((SecurityContextHolder.getContext().getAuthentication() == null ||
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser")) &&
+                 !((HttpServletRequest) servletRequest).getRequestURI().contains("sign")) {
+            System.out.println(SecurityContextHolder.getContext().getAuthentication());
             System.out.println(((HttpServletRequest) servletRequest).getRequestURI());
+//            System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
             ((HttpServletResponse) servletResponse).sendRedirect("/signIn");
-
         } else {
             filterChain.doFilter(servletRequest,servletResponse);
-        }
+        }*/
+        /*System.out.println(((HttpServletRequest) servletRequest).getRequestURI());
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            System.out.println(
+            SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equals("anonymousUser"));
+        }*/
+        filterChain.doFilter(servletRequest,servletResponse);
     }
 
 }
